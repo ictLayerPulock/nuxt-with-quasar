@@ -1,116 +1,65 @@
-<template>
+<!-- <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
-      <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
+    <div class="q-pa-md q-gutter-sm" style="width: 100%; max-width: 100%">
+    <q-banner inline-actions rounded class="bg-blue text-white">
+      LOGO
 
-        <q-toolbar-title>
-          Pulock - Quasar App
-        </q-toolbar-title>
+      <template v-slot:action>
+        <q-btn flat label="Home" />
+        <q-btn flat label="About" />
+        <q-btn flat label="Blog" />
+        <q-btn flat label="Shop" />
+        <q-btn flat label="Sign In" />
+        <q-btn flat label="Sign Up" />
+      </template>
+    </q-banner>
+    </div>
 
-        <div>Quasar Version - {{ $q.version }}</div>
-      </q-toolbar>
-    </q-header>
 
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-    >
-      <q-list>
-        <q-item-label
-          header
-        >
-          Essential Links
-        </q-item-label>
-
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
-      </q-list>
-    </q-drawer>
 
     <q-page-container>
       <router-view />
     </q-page-container>
   </q-layout>
 </template>
+ -->
 
-<script>
-import { defineComponent, ref } from 'vue'
-import EssentialLink from 'components/EssentialLink.vue'
+ <template>
+  <div class="">
+    <q-layout view="lHh lpr lFf" class="shadow-2">
+      <q-header elevated>
+        <div class="" style="width: 100%; max-width: 100%">
+          <q-banner  to="/" inline-actions rounded class="bg-blue text-white">
+            LOGO
 
-const linksList = [
-  {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
-  },
-  {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
-  },
-  {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
-  }
-]
+            <template v-slot:action>
+              <q-btn to="/" flat label="Home" />
+              <q-btn to="/about" flat label="About" />
+              <q-btn to="/form" flat label="Form" />
+              <q-btn to="/table" flat label="Table" />
+              <q-btn flat label="Blog" />
+              <q-btn flat label="Shop" />
+              <q-btn flat label="Sign In" />
+              <q-btn flat label="Sign Up" />
+            </template>
+          </q-banner>
+        </div>
+      </q-header>
 
-export default defineComponent({
-  name: 'MainLayout',
+      <q-footer >
+        <q-banner class="bg-primary text-white">
+          This is Footer Section
+          <template v-slot:action>
+            <q-btn flat color="white" label="LOGO" />
+            <q-btn to="/" flat color="white" label="Home" />
+          </template>
+        </q-banner>
+      </q-footer>
 
-  components: {
-    EssentialLink
-  },
+      <q-page-container>
+        <router-view></router-view>
+      </q-page-container>
+    </q-layout>
+  </div>
+</template>
 
-  setup () {
-    const leftDrawerOpen = ref(false)
-
-    return {
-      essentialLinks: linksList,
-      leftDrawerOpen,
-      toggleLeftDrawer () {
-        leftDrawerOpen.value = !leftDrawerOpen.value
-      }
-    }
-  }
-})
-</script>
