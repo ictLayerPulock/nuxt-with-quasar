@@ -1,0 +1,4 @@
+<template>
+    <Filter />  
+    <JournalList />  
+</template>
