@@ -1,6 +1,6 @@
 # Quasar App (quasar-project)
 
-A Quasar Project
+A Quasar Project- By Pulock
 
 ## Install the dependencies
 ```bash
