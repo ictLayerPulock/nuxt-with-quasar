@@ -4,8 +4,9 @@
       <q-card-section class="bg-white text-black">
         <div class="row">
           <div class="col-6">
-            <div class="q-gutter-x-md">
-              <strong class="text-h6">Journal</strong><i> List</i>
+            <div>
+              <strong class="text-h6">Journal</strong>
+              <i class="text-subtitle1"> List</i>
             </div>
           </div>
           <div class="col-6">
@@ -32,25 +33,72 @@
               <q-list>
                 <q-item clickable v-close-popup @click="onItemClick">
                   <q-item-section>
-                    <q-item-label>Photos</q-item-label>
+                    <q-item-label>Journa ID</q-item-label>
                   </q-item-section>
                 </q-item>
 
                 <q-item clickable v-close-popup @click="onItemClick">
                   <q-item-section>
-                    <q-item-label>Videos</q-item-label>
+                    <q-item-label>Journa Date</q-item-label>
                   </q-item-section>
                 </q-item>
 
                 <q-item clickable v-close-popup @click="onItemClick">
                   <q-item-section>
-                    <q-item-label>Articles</q-item-label>
+                    <q-item-label>Voucher Type</q-item-label>
+                  </q-item-section>
+                </q-item>
+                <q-item clickable v-close-popup @click="onItemClick">
+                  <q-item-section>
+                    <q-item-label>Amount</q-item-label>
+                  </q-item-section>
+                </q-item>
+                <q-item clickable v-close-popup @click="onItemClick">
+                  <q-item-section>
+                    <q-item-label>Payment Method</q-item-label>
+                  </q-item-section>
+                </q-item>
+                <q-item clickable v-close-popup @click="onItemClick">
+                  <q-item-section>
+                    <q-item-label>Narration</q-item-label>
+                  </q-item-section>
+                </q-item>
+                <q-item clickable v-close-popup @click="onItemClick">
+                  <q-item-section>
+                    <q-item-label>Created By</q-item-label>
+                  </q-item-section>
+                </q-item>
+                <q-item clickable v-close-popup @click="onItemClick">
+                  <q-item-section>
+                    <q-item-label>Posting Date</q-item-label>
+                  </q-item-section>
+                </q-item>
+                <q-item clickable v-close-popup @click="onItemClick">
+                  <q-item-section>
+                    <q-item-label>Authorized</q-item-label>
+                  </q-item-section>
+                </q-item>
+                <q-item clickable v-close-popup @click="onItemClick">
+                  <q-item-section>
+                    <q-item-label>Action</q-item-label>
+                  </q-item-section>
+                </q-item>
+
+                <q-item clickable v-close-popup @click="onItemClick">
+                  <q-item-section>
+                    <q-item-label>Restore Default</q-item-label>
                   </q-item-section>
                 </q-item>
               </q-list>
             </q-btn-dropdown>
             <q-btn outline color="red" label="PDF" />
-            <q-btn outline color="green" label="Excel" />
+            <q-btn
+              outline
+              color="green"
+              label="Excel"
+              no-caps
+              @click="exportTable"
+            />
             <q-btn outline color="green" label="CSV" />
             <q-btn outline color="purple-4" label="Copy" />
             <q-btn outline color="blue-grey-4" label="Print" />
@@ -58,19 +106,33 @@
               <q-list>
                 <q-item clickable v-close-popup @click="onItemClick">
                   <q-item-section>
-                    <q-item-label>Photos</q-item-label>
+                    <q-item-label>5</q-item-label>
+                  </q-item-section>
+                </q-item>
+                <q-item clickable v-close-popup @click="onItemClick">
+                  <q-item-section>
+                    <q-item-label>10</q-item-label>
+                  </q-item-section>
+                </q-item>
+                <q-item clickable v-close-popup @click="onItemClick">
+                  <q-item-section>
+                    <q-item-label>25</q-item-label>
                   </q-item-section>
                 </q-item>
 
                 <q-item clickable v-close-popup @click="onItemClick">
                   <q-item-section>
-                    <q-item-label>Videos</q-item-label>
+                    <q-item-label>50</q-item-label>
                   </q-item-section>
                 </q-item>
-
                 <q-item clickable v-close-popup @click="onItemClick">
                   <q-item-section>
-                    <q-item-label>Articles</q-item-label>
+                    <q-item-label>100</q-item-label>
+                  </q-item-section>
+                </q-item>
+                <q-item clickable v-close-popup @click="onItemClick">
+                  <q-item-section>
+                    <q-item-label>200</q-item-label>
                   </q-item-section>
                 </q-item>
               </q-list>
@@ -80,21 +142,8 @@
       </div>
 
       <div class="q-pa-md">
-        <!-- <q-option-group
-          v-model="separator"
-          inline
-          class="q-mb-md"
-          :options="[
-            { label: 'Horizontal (default)', value: 'horizontal' },
-            { label: 'Vertical', value: 'vertical' },
-            { label: 'Cell', value: 'cell' },
-            { label: 'None', value: 'none' },
-          ]"
-        /> -->
-
         <q-table
-          flat
-          bordered
+          outlined
           title=""
           :rows="rows"
           :columns="columns"
@@ -102,19 +151,19 @@
           :separator="separator"
         >
           <template v-slot:header-cell-journal_id="props">
-            <q-th :props="props" class="bg-deep-purple-4">
+            <q-th :props="props" class="bg-deep-purple-4 text-white">
               <q-input
                 dense
                 outlined
                 class="bg-white text-center q-my-sm rounded-borders"
                 v-model="journal_id"
-                placeholder="Journal ID"
+                label="Journal ID"
               />
-              <div class="text-white text-left">{{ props.col.label }}</div>
+              {{ props.col.label }}
             </q-th>
           </template>
           <template v-slot:header-cell-journal_date="props">
-            <q-th :props="props" class="bg-deep-purple-4">
+            <q-th :props="props" class="bg-deep-purple-4 text-white">
               <q-input
                 outlined
                 class="bg-white q-my-sm rounded-borders"
@@ -122,11 +171,11 @@
                 type="date"
                 dense
               />
-              <div class="text-white text-left">{{ props.col.label }}</div>
+              {{ props.col.label }}
             </q-th>
           </template>
           <template v-slot:header-cell-voucher_type="props">
-            <q-th :props="props" class="bg-deep-purple-4">
+            <q-th :props="props" class="bg-deep-purple-4 text-white">
               <q-select
                 dense
                 outlined
@@ -147,52 +196,54 @@
                   </q-item>
                 </template>
               </q-select>
-              <div class="text-white text-left">{{ props.col.label }}</div>
+              {{ props.col.label }}
             </q-th>
           </template>
           <template v-slot:header-cell-amount="props">
-            <q-th :props="props" class="bg-deep-purple-4">
+            <q-th :props="props" class="bg-deep-purple-4 text-white">
               <q-input
                 class="bg-white text-center q-my-sm rounded-borders"
                 v-model="amount"
                 dense
                 outlined
-                placeholder="Amount"
+                label="Amount"
               />
-              <div class="text-white text-right">{{ props.col.label }}</div>
+              {{ props.col.label }}
             </q-th>
           </template>
           <template v-slot:header-cell-payment_method="props">
-            <q-th :props="props" class="bg-deep-purple-4">
-              <div class="text-white text-left">{{ props.col.label }}</div>
+            <q-th :props="props" class="bg-deep-purple-4 text-white">
+              <div class="text-white text-left q-pt-sm">
+                {{ props.col.label }}
+              </div>
             </q-th>
           </template>
           <template v-slot:header-cell-narration="props">
-            <q-th :props="props" class="bg-deep-purple-4">
+            <q-th :props="props" class="bg-deep-purple-4 text-white">
               <q-input
                 outlined
                 class="bg-white text-left q-my-sm rounded-borders"
                 v-model="narration"
                 dense
-                placeholder="Narration"
+                label="Narration"
               />
-              <div class="text-white text-left">{{ props.col.label }}</div>
+              {{ props.col.label }}
             </q-th>
           </template>
           <template v-slot:header-cell-created_by="props">
-            <q-th :props="props" class="bg-deep-purple-4">
+            <q-th :props="props" class="bg-deep-purple-4 text-white">
               <q-input
                 class="bg-white text-left q-my-sm rounded-borders"
                 v-model="created_by"
                 dense
                 outlined
-                placeholder="User"
+                label="User"
               />
-              <div class="text-white text-left">{{ props.col.label }}</div>
+              {{ props.col.label }}
             </q-th>
           </template>
           <template v-slot:header-cell-posting_date="props">
-            <q-th :props="props" class="bg-deep-purple-4">
+            <q-th :props="props" class="bg-deep-purple-4 text-white">
               <q-input
                 class="bg-white q-my-sm rounded-borders"
                 v-model="posting_date"
@@ -200,32 +251,65 @@
                 dense
                 outlined
               />
-              <div class="text-white text-left">{{ props.col.label }}</div>
+              {{ props.col.label }}
             </q-th>
           </template>
           <template v-slot:header-cell-authorized="props">
-            <q-th :props="props" class="bg-deep-purple-4">
-              <div class="text-white text-left">{{ props.col.label }}</div>
+            <q-th :props="props" class="bg-deep-purple-4 text-white q-pt-sm">
+              {{ props.col.label }}
             </q-th>
           </template>
-          <!-- ================ table body Start================= -->
-          
           <template v-slot:body-cell-authorized="props">
             <q-td :props="props">
-              <q-badge color="blue" :label="props.value" />
-                <!-- <q-option-group v-model="authorized_group"  :options_authorized="options_authorized"  color="yellow" type="toggle" /> -->
+              <q-toggle
+                v-model="authorized"
+                checked-icon="check"
+                color="green"
+                unchecked-icon="clear"
+              />
             </q-td>
           </template>
-          <!-- ================ table body End================= -->
+
           <template v-slot:header-cell-action="props">
-            <q-th :props="props" class="bg-deep-purple-4">
-              <div class="text-white text-left q-pt-sm">
-                {{ props.col.label }}
-              </div>
+            <q-th :props="props" class="bg-deep-purple-4 text-white">
+              {{ props.col.label }}
             </q-th>
+          </template>
+          <template v-slot:body-cell-action="props">
+            <q-td :props="props">
+              <q-btn
+                class="rounded-borders"
+                padding="xs"
+                size="15px"
+                color="deep-purple-4"
+                icon="add"
+              >
+                <q-menu
+                  anchor="center start"
+                  color="deep-purple-4"
+                  self="top right"
+                >
+                  <q-item clickable>
+                    <q-item-section>View</q-item-section>
+                  </q-item>
+                  <q-item clickable>
+                    <q-item-section>Edit</q-item-section>
+                  </q-item>
+                  <q-item clickable>
+                    <q-item-section>Authorized</q-item-section>
+                  </q-item>
+                  <q-item clickable>
+                    <q-item-section>Reverse</q-item-section>
+                  </q-item>
+                </q-menu>
+              </q-btn>
+            </q-td>
           </template>
         </q-table>
       </div>
+      <p class="q-pa-sm">
+        This is my table for demo Application by Pulock
+      </p>
       <q-separator />
     </q-card>
   </div>
@@ -245,23 +329,26 @@ const stringOptions = [
 
 const columns = [
   {
-    name: 'name',
+    name: "name",
     name: "journal_id",
     label: "Journal ID",
     align: "left",
     field: "journal_id",
+    sortable: true,
   },
   {
     name: "journal_date",
     label: "Journal Date",
     align: "left",
     field: "journal_date",
+    sort: (a, b) => parseInt(a, 10) - parseInt(b, 10),
   },
   {
     name: "voucher_type",
     field: "voucher_type",
     label: "Voucher Type",
     align: "left",
+    sort: (a, b) => parseInt(a, 10) - parseInt(b, 10),
   },
 
   // 1.
@@ -272,6 +359,7 @@ const columns = [
     label: "Amount",
     field: "amount",
     align: "right",
+    sort: (a, b) => parseInt(a, 10) - parseInt(b, 10),
   },
   // 2.
   {
@@ -279,19 +367,28 @@ const columns = [
     label: "Payment Method",
     field: "payment_method",
     align: "left",
+    sort: (a, b) => parseInt(a, 10) - parseInt(b, 10),
   }, // 3.
-  { name: "narration", label: "Narration", field: "narration", align: "left" }, // 4.
+  {
+    name: "narration",
+    label: "Narration",
+    field: "narration",
+    align: "left",
+    sort: (a, b) => parseInt(a, 10) - parseInt(b, 10),
+  }, // 4.
   {
     name: "created_by",
     label: "Created By",
     field: "created_by",
     align: "left",
+    sort: (a, b) => parseInt(a, 10) - parseInt(b, 10),
   }, // 5.
   {
     name: "posting_date",
     label: "Posting Date",
     field: "posting_date",
     align: "left",
+    sort: (a, b) => parseInt(a, 10) - parseInt(b, 10),
   }, // 6.
   {
     name: "authorized",
@@ -313,60 +410,60 @@ const rows = [
     journal_id: 100000020,
     journal_date: "03/05/2024",
     amount: "11,387.08",
-    voucher_type: "Stock Journal",
-    payment_method: "Cash",
+    voucher_type: "Stock ",
+    payment_method: "Online",
     narration: "Adjustment for COGS",
-    created_by: "Mushahadur",
-    posting_date: "02/05/2024",
+    created_by: "Mushahadur Rahman Khan",
+    posting_date: "22/05/2022",
     authorized: "text",
   },
   {
-    journal_id: 100000020,
+    journal_id: 1020,
+    journal_date: "12/05/2021",
+    amount: "11890",
+    voucher_type: "Stock ",
+    payment_method: "Cash",
+    narration: " for COGS",
+    created_by: "pulock",
+    posting_date: "02/05/2024",
+  },
+  {
+    journal_id: 100,
+    journal_date: "02/05/2024",
+    amount: "11,387",
+    voucher_type: "Stock Journal",
+    payment_method: "Online",
+    narration: "Adjustment",
+    created_by: "mrk",
+    posting_date: "3/7/2025",
+  },
+  {
+    journal_id: 1,
     journal_date: "02/05/2024",
     amount: "11,387.08",
-    voucher_type: "Stock Journal",
+    voucher_type: "Stock ",
     payment_method: "Cash",
-    narration: "Adjustment for COGS",
+    narration: "COGS",
     created_by: "Mushahadur",
+    posting_date: "02/05/2024",
+  },
+  {
+    journal_id: 1,
+    journal_date: "02/05/2024",
+    amount: "11,3",
+    voucher_type: "Stock Journal",
+    payment_method: "Online",
+    narration: "Adjustment for",
+    created_by: "mrk",
     posting_date: "02/05/2024",
   },
   {
     journal_id: 100000020,
     journal_date: "02/05/2024",
-    amount: "11,387.08",
+    amount: "11",
     voucher_type: "Stock Journal",
     payment_method: "Cash",
-    narration: "Adjustment for COGS",
-    created_by: "Mushahadur",
-    posting_date: "02/05/2024",
-  },
-  {
-    journal_id: 100000020,
-    journal_date: "02/05/2024",
-    amount: "11,387.08",
-    voucher_type: "Stock Journal",
-    payment_method: "Cash",
-    narration: "Adjustment for COGS",
-    created_by: "Mushahadur",
-    posting_date: "02/05/2024",
-  },
-  {
-    journal_id: 100000020,
-    journal_date: "02/05/2024",
-    amount: "11,387.08",
-    voucher_type: "Stock Journal",
-    payment_method: "Cash",
-    narration: "Adjustment for COGS",
-    created_by: "Mushahadur",
-    posting_date: "02/05/2024",
-  },
-  {
-    journal_id: 100000020,
-    journal_date: "02/05/2024",
-    amount: "11,387.08",
-    voucher_type: "Stock Journal",
-    payment_method: "Cash",
-    narration: "Adjustment for COGS",
+    narration: "for COGS",
     created_by: "Mushahadur",
     posting_date: "02/05/2024",
   },
@@ -376,6 +473,7 @@ export default {
   setup() {
     const options = ref(stringOptions);
     return {
+      search: ref(""),
       dense: ref(true),
       journal_id: ref(""),
       journal_date: ref(""),
@@ -402,23 +500,40 @@ export default {
           );
         });
       },
+      authorized: ref(false),
+      onItemClick() {
+        // console.log('Clicked on an Item')
+      },
+      // exportTable() {
+      //   // naive encoding to csv format
+      //   const content = [columns.map((col) => wrapCsvValue(col.label))]
+      //     .concat(
+      //       rows.map((row) =>
+      //         columns
+      //           .map((col) =>
+      //             wrapCsvValue(
+      //               typeof col.field === "function"
+      //                 ? col.field(row)
+      //                 : row[col.field === void 0 ? col.name : col.field],
+      //               col.format,
+      //               row
+      //             )
+      //           )
+      //           .join(",")
+      //       )
+      //     )
+      //     .join("\r\n");
 
-      authorized_group: ref(['op1']),
+      //   const status = exportFile("table-export.csv", content, "text/csv");
 
-      options_authorized: [
-        {
-          label: 'Option 1',
-          value: 'op1'
-        },
-        {
-          label: 'Option 2',
-          value: 'op2'
-        },
-        {
-          label: 'Option 3',
-          value: 'op3'
-        }
-      ]
+      //   if (status !== true) {
+      //     $q.notify({
+      //       message: "Browser denied file download...",
+      //       color: "negative",
+      //       icon: "warning",
+      //     });
+      //   }
+      // },
     };
   },
 };
