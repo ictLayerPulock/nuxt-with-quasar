@@ -9,15 +9,157 @@
               <i class="text-subtitle1"> List</i>
             </div>
           </div>
+
           <div class="col-6">
             <div class="row q-pa-md q-gutter-md justify-end">
-              <q-badge rounded color="green" />
+              <q-btn
+                color="deep-purple-4"
+                label="Filter Options"
+                icon="change_history"
+                @click="filter = true"
+              />
+
+              <!-- <q-btn-dropdown
+                color="deep-purple-4"
+                label="Filter Options"
+                @click="filter = true" 
+                dropdown-icon="change_history"
+              >
+                <q-list>
+                  <q-item clickable v-close-popup @click="onItemClick">
+                    <q-item-section>
+                      <q-item-label>Photos</q-item-label>
+                    </q-item-section>
+                  </q-item>
+
+                  <q-item clickable v-close-popup @click="onItemClick">
+                    <q-item-section>
+                      <q-item-label>Videos</q-item-label>
+                    </q-item-section>
+                  </q-item>
+
+                  <q-item clickable v-close-popup @click="onItemClick">
+                    <q-item-section>
+                      <q-item-label>Articles</q-item-label>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </q-btn-dropdown> -->
+
+              <!-- <q-badge rounded color="green" />
               <q-badge rounded color="yellow" />
-              <q-badge rounded color="red" />
+              <q-badge rounded color="red" /> -->
             </div>
           </div>
         </div>
         <hr />
+
+        <!-- <q-dialog v-model="filter" persistent>
+          <div class="q-pa-md" style="width: 800px; max-width: 80vw">
+            <q-card class="my-card">
+              <div class="q-pa-md">
+                <div class="row q-gutter-sm">
+                  <div class="col-12 col-md col-sm">
+                    <q-select
+                      outlined
+                      :dense="dense"
+                      v-model="payment"
+                      clearable
+                      use-input
+                      hide-selected
+                      fill-input
+                      input-debounce="0"
+                      label="Payment Method"
+                      :options="optionsPayment"
+                      @filter="filterPayment"
+                      @filter-abort="abortFilterFn"
+                    >
+                      <template v-slot:no-option>
+                        <q-item>
+                          <q-item-section class="text-grey">
+                            No results
+                          </q-item-section>
+                        </q-item>
+                      </template>
+                    </q-select>
+                  </div>
+                  <div class="col-12 col-md col-sm">
+                    <q-select
+                      outlined
+                      :dense="dense"
+                      v-model="model"
+                      clearable
+                      use-input
+                      hide-selected
+                      fill-input
+                      input-debounce="0"
+                      label="Voucher Type"
+                      :options="options"
+                      @filter="filterFn"
+                      @filter-abort="abortFilterFn"
+                    >
+                      <template v-slot:no-option>
+                        <q-item>
+                          <q-item-section class="text-grey">
+                            No results
+                          </q-item-section>
+                        </q-item>
+                      </template>
+                    </q-select>
+                  </div>
+                  <div class="col-12 col-md col-sm">
+                    <q-select
+                      outlined
+                      :dense="dense"
+                      v-model="authorized"
+                      clearable
+                      use-input
+                      input-debounce="0"
+                      hide-selected
+                      fill-input
+                      label="Authorized"
+                      :options="optionsAuthorized"
+                      @filter="filterAuthorized"
+                      @filter-abort="abortFilterFn"
+                    >
+                      <template v-slot:no-option>
+                        <q-item>
+                          <q-item-section class="text-grey">
+                            No results
+                          </q-item-section>
+                        </q-item>
+                      </template>
+                    </q-select>
+                  </div>
+                  <div class="col-12 col-md col-sm">
+                    <div
+                      class="row col-2 col-12 col-md-12 col-sm justify-center q-gutter-sm"
+                    >
+                      <div>
+                        <q-btn
+                          label="Read"
+                          type="submit"
+                          color="deep-purple-4"
+                          v-close-popup
+                        />
+                      </div>
+                      <div>
+                        <q-btn
+                          label="Reset"
+                          type="submit"
+                          color="red-14"
+                          v-close-popup
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <q-separator />
+            </q-card>
+          </div>
+        </q-dialog> -->
       </q-card-section>
       <div class="q-pa-md">
         <div class="row q-gutter-sm">
@@ -29,7 +171,22 @@
             </q-input>
           </div>
           <div class="col-12 col-md col-sm q-gutter-sm row justify-end">
-            <q-btn-dropdown outline color="purple-4" label="Column Visibility">
+            <q-select
+              v-model="visibleColumns"
+              multiple
+              options-dense
+              :display-value="$q.lang.table.columns"
+              emit-value
+              map-options
+              :options="columns"
+              option-value="name"
+              options-cover
+              outlined
+              dense
+              style="min-width: 180px"
+            />
+
+            <!-- <q-btn-dropdown outline color="purple-4" label="Column Visibility">
               <q-list>
                 <q-item clickable v-close-popup @click="onItemClick">
                   <q-item-section>
@@ -90,16 +247,17 @@
                   </q-item-section>
                 </q-item>
               </q-list>
-            </q-btn-dropdown>
+            </q-btn-dropdown> -->
+
             <q-btn outline color="red" label="PDF" />
+            <q-btn outline color="green" label="Excel" no-caps />
             <q-btn
               outline
               color="green"
-              label="Excel"
+              label="CSV"
               no-caps
               @click="exportTable"
             />
-            <q-btn outline color="green" label="CSV" />
             <q-btn outline color="purple-4" label="Copy" />
             <q-btn outline color="blue-grey-4" label="Print" />
             <q-btn-dropdown outline color="blue-5" label="Length">
@@ -149,6 +307,7 @@
           :columns="columns"
           row-key="name"
           :separator="separator"
+          :visible-columns="visibleColumns"
         >
           <template v-slot:header-cell-journal_id="props">
             <q-th :props="props" class="bg-deep-purple-4 text-white">
@@ -307,9 +466,7 @@
           </template>
         </q-table>
       </div>
-      <p class="q-pa-sm">
-        This is my table for demo Application by Pulock
-      </p>
+      <p class="q-pa-sm">This is my table for demo Application by Pulock</p>
       <q-separator />
     </q-card>
   </div>
@@ -318,6 +475,7 @@
   
   <script>
 import { ref } from "vue";
+import { exportFile, useQuasar } from "quasar";
 
 const stringOptions = [
   "Stock Journa",
@@ -336,6 +494,7 @@ const columns = [
     field: "journal_id",
     sortable: true,
   },
+
   {
     name: "journal_date",
     label: "Journal Date",
@@ -469,10 +628,42 @@ const rows = [
   },
 ];
 
+function wrapCsvValue(val, formatFn, row) {
+  let formatted = formatFn !== void 0 ? formatFn(val, row) : val;
+
+  formatted =
+    formatted === void 0 || formatted === null ? "" : String(formatted);
+
+  formatted = formatted.split('"').join('""');
+  /**
+   * Excel accepts \n and \r in strings, but some other CSV parsers do not
+   * Uncomment the next two lines to escape new lines
+   */
+  // .split('\n').join('\\n')
+  // .split('\r').join('\\r')
+
+  return `"${formatted}"`;
+}
+
 export default {
   setup() {
+    const $q = useQuasar();
     const options = ref(stringOptions);
     return {
+      visibleColumns: ref([
+        "journal_id",
+        "journal_date",
+        "voucher_type",
+        "amount",
+        "payment_method",
+        "narration",
+        "created_by",
+        "posting_date",
+        "authorized",
+        "action",
+        "restore_default",
+      ]),
+      filter: ref(false),
       search: ref(""),
       dense: ref(true),
       journal_id: ref(""),
@@ -504,36 +695,37 @@ export default {
       onItemClick() {
         // console.log('Clicked on an Item')
       },
-      // exportTable() {
-      //   // naive encoding to csv format
-      //   const content = [columns.map((col) => wrapCsvValue(col.label))]
-      //     .concat(
-      //       rows.map((row) =>
-      //         columns
-      //           .map((col) =>
-      //             wrapCsvValue(
-      //               typeof col.field === "function"
-      //                 ? col.field(row)
-      //                 : row[col.field === void 0 ? col.name : col.field],
-      //               col.format,
-      //               row
-      //             )
-      //           )
-      //           .join(",")
-      //       )
-      //     )
-      //     .join("\r\n");
 
-      //   const status = exportFile("table-export.csv", content, "text/csv");
+      exportTable() {
+        // naive encoding to csv format
+        const content = [columns.map((col) => wrapCsvValue(col.label))]
+          .concat(
+            rows.map((row) =>
+              columns
+                .map((col) =>
+                  wrapCsvValue(
+                    typeof col.field === "function"
+                      ? col.field(row)
+                      : row[col.field === void 0 ? col.name : col.field],
+                    col.format,
+                    row
+                  )
+                )
+                .join(",")
+            )
+          )
+          .join("\r\n");
 
-      //   if (status !== true) {
-      //     $q.notify({
-      //       message: "Browser denied file download...",
-      //       color: "negative",
-      //       icon: "warning",
-      //     });
-      //   }
-      // },
+        const status = exportFile("journal-list.csv", content, "text/csv");
+
+        if (status !== true) {
+          $q.notify({
+            message: "Browser denied file download...",
+            color: "negative",
+            icon: "warning",
+          });
+        }
+      },
     };
   },
 };
