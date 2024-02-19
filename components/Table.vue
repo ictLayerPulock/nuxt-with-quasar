@@ -9,7 +9,8 @@
     <q-btn label="Confirm" color="primary" @click="filter = true" />
 
     <br>
-    <button @click="$emit('nameTest',`this is value`)">Emit Value</button>
+    <button @click="$emit('nameTest',`this is value`)">Emit Value</button> <br>
+    <button @click="getData">Emit Value Way Two</button>
     <br>
     <q-dialog v-model="filter" persistent>
   
@@ -114,25 +115,10 @@
   </div>
 </template>
 
-<!-- <script >
-import { ref } from "vue";
-
-export default {
-  setup() {
-    const props = defineProps({
-        name: String,
-        category: String,
-        price: String,
-    });
-    return {
-      filter: ref(false),
-    };
-  },
-};
-</script> -->
-
 
 <script setup>
+import event from "~/node_modules/quasar/src/utils/event";
+
     const props = defineProps({
         name: String,
         category: String,
@@ -140,6 +126,28 @@ export default {
     });
 
 defineEmits(['nameTest'])
+
+/*
+method:{
+  getData(event){
+    this.$emit("customChange",`This si s2nd time values`)
+  }
+}
+*/
+
+
+/*
+export default{
+  setup(props, {emit}){
+    const getData = (event)=>{
+      emit("customChange", `This si 3rd time values`)
+    }
+  }
+  return{
+    getData,
+  }
+}
+*/
 
 </script>
 
