@@ -1,11 +1,11 @@
 <template>
-	<q-page class="q-gutter-lg">
+	<div class="q-gutter-lg q-pa-md">
 		<!-- Filters -->
 		<q-card v-if="!filter_show">
 			<q-card-section class="q-py-none">
 				<div class="row q-gutter-md items-center">
 					<div class="col-6">
-						<CommonCostCenterSelect @cost-center-select="costCenterSelect" />
+						<CostCenterSelect @cost-center-select="costCenterSelect" />
 					</div>
 					<div class="col-4">
 						<q-input label="Date Range" v-model="date_range" mask="date" color="primary" dense outlined :rules="[val => val && val.length > 0 || 'Select Date Range']">
@@ -226,7 +226,7 @@
 				</div>
 			</q-card-section>
 		</q-card>
-	</q-page>
+	</div>
 </template>
 
 <script setup>
