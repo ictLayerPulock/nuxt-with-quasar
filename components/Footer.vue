@@ -5,7 +5,8 @@
 
       <template v-slot:action>
         <q-btn flat label="About" />
-        <q-btn flat label="License" />
+        <q-btn flat label="balance-sheet" />
+        <NuxtLink to="/balance-sheet">balance</NuxtLink>
       </template>
     </q-banner>
   </div>
