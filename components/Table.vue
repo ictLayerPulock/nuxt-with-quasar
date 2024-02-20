@@ -1,14 +1,16 @@
 <template>
   <div class="q-pa-md q-gutter-sm">
     <div>
-     <h3>Props section</h3> 
+     <h5>Props section</h5> 
       <p class="h-3">Name : {{ name }}</p>
       <p class="h4">Category :{{ category }}</p>
       <p class="h5">Price :{{ price }}</p>
     </div>
-    <q-btn label="Confirm" color="primary" @click="filter = true" />
-
     <br>
+    <h5>Emit section</h5> 
+    <!-- <q-btn label="Confirm" color="primary" @click="filter = true" /> -->
+
+  
     <button @click="$emit('nameTest',`this is value`)">Emit Value</button> <br>
     <button @click="getData">Emit Value Way Two</button>
     <br>
@@ -113,29 +115,32 @@
    
     </q-dialog>
   </div>
+  <br>
+  <h5>API calling from server </h5> 
 </template>
 
 
 <script setup>
-import event from "~/node_modules/quasar/src/utils/event";
 
-    const props = defineProps({
-        name: String,
-        category: String,
-        price: String,
-    });
+  const props = defineProps({
+      name: String,
+      category: String,
+      price: String,
+  });
 
+// 1st way
 defineEmits(['nameTest'])
 
-/*
-method:{
-  getData(event){
-    this.$emit("customChange",`This si s2nd time values`)
+
+// 2nd way
+
+function getData(){
+    $emit("customChange",`This si s2nd time values`)
   }
-}
-*/
 
 
+
+// 3rd way
 /*
 export default{
   setup(props, {emit}){
