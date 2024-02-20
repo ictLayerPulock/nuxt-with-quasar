@@ -248,8 +248,4 @@ function handleRead() {
 	// console.log("Handle Read")
 }
 
-/* Layout */
-definePageMeta({
-	layout: "desktop"
-})
 </script>

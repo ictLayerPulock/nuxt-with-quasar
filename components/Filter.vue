@@ -2,24 +2,7 @@
   <div class="q-pa-md q-gutter-sm">
     <q-card class="my-card">
       <q-card-section class="bg-white text-black">
-        <div class="row">
-          <div class="col-6">
-            <div>
-              <strong class="text-h6">Filter</strong>
-              <i> Options</i>
-            </div>
-          </div>
-          <div class="col-6">
-            <div class="row q-pa-md q-gutter-md justify-end">
-              <q-badge rounded color="green" />
-              <q-badge rounded color="yellow" />
-              <q-badge rounded color="red" />
-            </div>
-          </div>
-        </div>
-        <hr />
-      </q-card-section>
-      <div class="q-pa-md">
+        
         <div class="row q-gutter-x-sm">
           <div class="col-12 col-md col-sm">
             <p>Journal Start Date</p>
@@ -97,7 +80,7 @@
           </div>
         </div>
         <br />
-        <hr />
+   
 
         <div class="row text-capitalize">
           <div class="col-10"></div>
@@ -108,7 +91,10 @@
             <div><q-btn label="Reset" type="submit" color="red-14" /></div>
           </div>
         </div>
-      </div>
+  
+    
+      </q-card-section>
+      
 
       <q-separator />
     </q-card>
