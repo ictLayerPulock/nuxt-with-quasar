@@ -11,9 +11,11 @@ function nameTest(dataPass){
 
 <template>
     <Filter />  
+    <li><NuxtLink to="/balance-sheet">balance</NuxtLink></li>
+    <li><NuxtLink to="/journal-book">journal-book</NuxtLink></li>
     <JournalList />  
 
-    
+   
     <Table @name-test="nameTest" 
         :name="`iPhone`"
         :category="`Human`"
