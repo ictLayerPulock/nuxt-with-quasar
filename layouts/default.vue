@@ -1,9 +1,13 @@
 <template>
-    <div style="background-color: #F9F7FA;">
-        <Header />
-      <slot />
+  <div style="background-color: #f9f7fa">
+   
+      <Header />
+   
 
+    <slot />
+    
       <Footer />
-    </div>
-  </template>
+  
+  </div>
+</template>
   
